@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stopify – Web Player</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/07283258e2.js" crossorigin="anonymous"></script>
+  <link rel="icon" href="images/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="main_div">
+    <h2 class="brand_name"><i class="fa-solid fa-headphones-simple"></i> Stopify</h2>
+    <i class="mode fa-solid fa-moon" id="icon"></i>
+    <div class="music_container">
+      <h2 id="title">FADED</h2>
+      <h3 id="artist">Alan Walker</h3>
+      <div class="img_container">
+        <img src="images/pic-1.jpg" alt="">
+      </div>
+      <audio src="music/music-1.mp3"></audio>
+
+
+      <!-- progress bar -->
+      <div class="progressbar_container"id="progressbar_container">
+        <div class="progress_duration_meter">
+          <div class="current_time" id="current_time">0:00</div>
+          <div class="duration" id="duration"> 3:32</div>
+        </div>
+        <div class="progress_div"id="progress_div">
+          <div class="progress" id="progress"></div>
+        </div>
+      </div>
+
+
+
+      <!-- controls -->
+      <div class="music_controls">
+        <i class="fas fa-solid fa-backward" id="prev" title="Previous"></i>
+        <i class="main_button fas fa-solid fa-play" id="play" title="Play"></i>
+        <i class="fas fa-solid fa-forward" id="next" title="Next"></i>
+      </div>
+    </div>
+    <footer>Made with <i class="fa-solid fa-heart"></i> in India.</footer>
+  </div>
+
+
+
+
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+  <script src="index.js" charset="utf-8"></script>
+</body>
+
+</html>

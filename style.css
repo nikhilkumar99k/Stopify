@@ -1,0 +1,209 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0%;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #f6f6f6;
+  --secondary-color: black;
+  --tertiary-color: #ffffff;
+  --title-color: #171717;
+  --music-title:#171717;
+  --music-artist:#cccaca;
+  --progress-color:rgba(0, 0, 0, 0.07);
+  --main-back:rgba(0, 0, 0, 0.2);
+  --barnd-color:rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme {
+  --primary-color:#1a1a1a;
+  --secondary-color: #ffffff;
+  --tertiary-color: #000000;
+  --title-color:#b3b3b3;
+  --music-title:#d9d9d9;
+  --music-artist:#595959;
+  --progress-color:#333333;
+  --main-back:#404040;
+  --barnd-color:#000000;
+}
+
+html {
+  font-size: 62.5%;
+  */ 1rem=10px not 16px */ font-family: 'Jost', sans-serif;
+}
+
+.main_div {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--primary-color);
+  display: grid;
+  place-items: center;
+  color: var(--secondary-color);
+}
+
+footer {
+  font-size: 1.3rem;
+}
+
+.music_container {
+  width: 35rem; //350px
+  height: 55rem;
+  background-color: var(--tertiary-color);
+  border-radius: 2rem;
+  box-shadow: 0 1.2rem 3rem 0.5rem var(--main-back);
+  padding: 3rem;
+  text-align: center;
+}
+
+.brand_name {
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  word-spacing: 0.5rem;
+  color: var(--title-color);
+  font-size: 3.5rem;
+  font-weight: 500;
+  text-shadow: 0 0.3rem 0.5rem var(--barnd-color);
+}
+
+.music_container #title {
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  word-spacing: 0.5rem;
+  color: var(--music-title);
+  margin: 2rem 0 0.5rem 0;
+  font-size: 2.5rem;
+  font-weight: 500;
+  text-shadow: 0 0.3rem 0.5rem var(--barnd-color);
+}
+
+.music_container #artist {
+  text-transform: capitalize;
+  letter-spacing: 0.1rem;
+  color: var(--music-artist);
+  margin-bottom: 4rem;
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+.img_container {
+  width: 25rem;
+  height: 25rem;
+  margin: auto;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 1.2rem 3rem 0.5rem rgba(0, 0, 0, 0.4);
+}
+
+.music_container .fas {
+  color: var(--secondary-color);
+  font-size: 2rem;
+  cursor: pointer;
+  filter: drop-shadow(0 1.2rem 3rem 0.5rem rgba(0, 0, 0, 0.4));
+}
+
+.music_controls {
+  width: 20rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  margin-top: 1rem;
+}
+
+.music_controls .main_button {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+}
+.music_controls .fas:hover {
+  color: grey;
+}
+
+.music_controls .main_button:hover {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  box-shadow: 0 1rem 2rem 0.2rem rgba(0, 0, 0, 0.4)
+}
+
+/* add anime class to anmate */
+.anime {
+  animation: rotatePlayer 3.5s linear infinite;
+}
+
+@keyframes rotatePlayer {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* progress style  */
+.progressbar_container {
+  width: 100%;
+  height: auto;
+  padding: 1rem 0;
+  margin-top: 1rem;
+}
+
+.progress_div {
+  width: 100%;
+  height: 0.5rem;
+  box-shadow: 0 1px 2px var(--progress-color), 0 2px 4px var(--progress-color), 0 4px 8px var(--progress-color), 0 8px 16px var(--progress-color), 0 16px 32px var(--progress-color), 0 32px 64px var(--progress-color);
+  border-radius: 4rem;
+  position: relative;
+  margin-top: 0.5rem;
+  transition: all 1s linear;
+  -moz-transition: all 1s linear;
+  -o-transition: all 1s linear;
+  -webkit-transition: all 1s linear;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: var(--secondary-color);
+  border-radius: 4rem;
+  /* transition:width 1s linear;
+  -moz-transition:width 1s linear;
+  -o-transition:width 1s linear;
+  -webkit-transition: width 1s linear; */
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.progress_duration_meter {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+}
+
+.mode {
+  position: absolute;
+  top: 51px;
+  right: 25px;
+  font-size: 2rem;
+}
