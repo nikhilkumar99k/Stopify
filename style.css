@@ -1,209 +1,150 @@
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0%;
-  box-sizing: border-box;
+const music = document.querySelector("audio");
+const img = document.querySelector("img");
+const play = document.getElementById("play");
+
+const artist = document.getElementById("artist");
+const title = document.getElementById("title");
+const prev = document.getElementById("prev");
+const next = document.getElementById("next");
+
+let progress = document.getElementById("progress");
+let total_duration = document.getElementById("duration");
+let current_time = document.getElementById("current_time");
+
+const progress_div = document.getElementById("progress_div");
+
+const icon = document.getElementById("icon");
+
+const songs = [{
+    name: "music-1",
+    title: "faded",
+    artist: "alan walker",
+    pic: "pic-1",
+  },
+  {
+    name: "music-2",
+    title: "mi gente",
+    artist: "willy william",
+    pic: "pic-2",
+  },
+  {
+    name: "music-3",
+    title: "Ram Siya Ram",
+    artist: "Sachet Tandon",
+    pic: "pic-3",
+  },
+  {
+    name: "music-4",
+    title: "Shiva Tandava",
+    artist: "Uma Mohan",
+    pic: "pic-4",
+  },
+  {
+    name: "music-5",
+    title: "zindagi",
+    artist: "Zubin Nautiyal",
+    pic: "pic-5",
+  },
+  {
+    name: "music-6",
+    title: "Tu Jo Mila",
+    artist: "KK, Pritam",
+    pic: "pic-6",
+  },
+];
+var isplaying = false;
+
+const playMusic = function() {
+  isplaying = true;
+  music.play();
+  play.classList.replace("fa-play", "fa-pause");
+  img.classList.add("anime");
+};
+// for pause function
+const pauseMusic = function() {
+  isplaying = false;
+  music.pause();
+  play.classList.replace("fa-pause", "fa-play");
+  img.classList.remove("anime");
+};
+play.addEventListener("click", function() {
+  isplaying ? pauseMusic() : playMusic();
+});
+
+
+// changing music data
+const loadSong = function(songs) {
+  title.textContent = songs.title;
+  artist.textContent = songs.artist;
+  music.src = "music/" + songs.name + ".mp3";
+  img.src = "images/" + songs.pic + ".jpg";
+};
+
+var songIndex = 0;
+const nextSong = function() {
+  songIndex = (songIndex + 1) % songs.length;
+  loadSong(songs[songIndex]);
+  playMusic();
+}
+const prevSong = function() {
+  songIndex = (songIndex - 1 + songs.length) % songs.length;
+  loadSong(songs[songIndex]);
+  playMusic();
 }
 
-:root {
-  --primary-color: #f6f6f6;
-  --secondary-color: black;
-  --tertiary-color: #ffffff;
-  --title-color: #171717;
-  --music-title:#171717;
-  --music-artist:#cccaca;
-  --progress-color:rgba(0, 0, 0, 0.07);
-  --main-back:rgba(0, 0, 0, 0.2);
-  --barnd-color:rgba(0, 0, 0, 0.3);
-}
+//  progress bar
 
-.dark-theme {
-  --primary-color:#1a1a1a;
-  --secondary-color: #ffffff;
-  --tertiary-color: #000000;
-  --title-color:#b3b3b3;
-  --music-title:#d9d9d9;
-  --music-artist:#595959;
-  --progress-color:#333333;
-  --main-back:#404040;
-  --barnd-color:#000000;
-}
+music.addEventListener("timeupdate", function(event) {
+  const {
+    currentTime,
+    duration
+  } = event.srcElement;
+  let progress_time = (currentTime / duration) * 100;
+  progress.style.width = `${progress_time}%`;
 
-html {
-  font-size: 62.5%;
-  */ 1rem=10px not 16px */ font-family: 'Jost', sans-serif;
-}
+  // music duration update
+  let min_duration = Math.floor(duration / 60);
+  let sec_duration = Math.floor(duration % 60);
 
-.main_div {
-  width: 100vw;
-  height: 100vh;
-  background-color: var(--primary-color);
-  display: grid;
-  place-items: center;
-  color: var(--secondary-color);
-}
-
-footer {
-  font-size: 1.3rem;
-}
-
-.music_container {
-  width: 35rem; //350px
-  height: 55rem;
-  background-color: var(--tertiary-color);
-  border-radius: 2rem;
-  box-shadow: 0 1.2rem 3rem 0.5rem var(--main-back);
-  padding: 3rem;
-  text-align: center;
-}
-
-.brand_name {
-  text-transform: uppercase;
-  letter-spacing: 0.2rem;
-  word-spacing: 0.5rem;
-  color: var(--title-color);
-  font-size: 3.5rem;
-  font-weight: 500;
-  text-shadow: 0 0.3rem 0.5rem var(--barnd-color);
-}
-
-.music_container #title {
-  text-transform: uppercase;
-  letter-spacing: 0.2rem;
-  word-spacing: 0.5rem;
-  color: var(--music-title);
-  margin: 2rem 0 0.5rem 0;
-  font-size: 2.5rem;
-  font-weight: 500;
-  text-shadow: 0 0.3rem 0.5rem var(--barnd-color);
-}
-
-.music_container #artist {
-  text-transform: capitalize;
-  letter-spacing: 0.1rem;
-  color: var(--music-artist);
-  margin-bottom: 4rem;
-  font-size: 2rem;
-  font-weight: 300;
-}
-
-.img_container {
-  width: 25rem;
-  height: 25rem;
-  margin: auto;
-}
-
-img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 1.2rem 3rem 0.5rem rgba(0, 0, 0, 0.4);
-}
-
-.music_container .fas {
-  color: var(--secondary-color);
-  font-size: 2rem;
-  cursor: pointer;
-  filter: drop-shadow(0 1.2rem 3rem 0.5rem rgba(0, 0, 0, 0.4));
-}
-
-.music_controls {
-  width: 20rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: auto;
-  margin-top: 1rem;
-}
-
-.music_controls .main_button {
-  width: 5rem;
-  height: 5rem;
-  border-radius: 50%;
-  background-color: var(--secondary-color);
-  color: var(--primary-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.4rem;
-}
-.music_controls .fas:hover {
-  color: grey;
-}
-
-.music_controls .main_button:hover {
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-  box-shadow: 0 1rem 2rem 0.2rem rgba(0, 0, 0, 0.4)
-}
-
-/* add anime class to anmate */
-.anime {
-  animation: rotatePlayer 3.5s linear infinite;
-}
-
-@keyframes rotatePlayer {
-  from {
-    transform: rotate(0deg);
+  if (sec_duration < 10)
+    sec_duration = `0${sec_duration}`;
+  let tot_duration = `${min_duration}:${sec_duration}`;
+  if (duration) {
+    total_duration.textContent = `${tot_duration}`;
   }
 
-  to {
-    transform: rotate(360deg);
+  // current duration update
+  let min_currentTime = Math.floor(currentTime / 60);
+  let sec_currentTime = Math.floor(currentTime % 60);
+  if (sec_currentTime < 10)
+    sec_currentTime = `0${sec_currentTime}`;
+  let tot_currentTime = `${min_currentTime}:${sec_currentTime}`;
+  if (currentTime) {
+    current_time.textContent = `${tot_currentTime}`;
   }
-}
+});
 
-/* progress style  */
-.progressbar_container {
-  width: 100%;
-  height: auto;
-  padding: 1rem 0;
-  margin-top: 1rem;
-}
+progress_div.addEventListener("click", function(event) {
+  const {
+    duration
+  } = music; // duration=music.duration;
+  let move_progress = (event.offsetX / event.srcElement.clientWidth) * duration;
+  music.currentTime = move_progress;
+});
+// next song if music ended
+music.addEventListener("ended", nextSong);
 
-.progress_div {
-  width: 100%;
-  height: 0.5rem;
-  box-shadow: 0 1px 2px var(--progress-color), 0 2px 4px var(--progress-color), 0 4px 8px var(--progress-color), 0 8px 16px var(--progress-color), 0 16px 32px var(--progress-color), 0 32px 64px var(--progress-color);
-  border-radius: 4rem;
-  position: relative;
-  margin-top: 0.5rem;
-  transition: all 1s linear;
-  -moz-transition: all 1s linear;
-  -o-transition: all 1s linear;
-  -webkit-transition: all 1s linear;
-  cursor: pointer;
-  -webkit-appearance: none;
-  appearance: none;
-}
+next.addEventListener("click", nextSong);
+prev.addEventListener("click", prevSong);
 
-.progress {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0%;
-  height: 100%;
-  background-color: var(--secondary-color);
-  border-radius: 4rem;
-  /* transition:width 1s linear;
-  -moz-transition:width 1s linear;
-  -o-transition:width 1s linear;
-  -webkit-transition: width 1s linear; */
-  cursor: pointer;
-  -webkit-appearance: none;
-  appearance: none;
-}
 
-.progress_duration_meter {
-  display: flex;
-  justify-content: space-between;
-  font-size: 1.2rem;
-}
+// mode
 
-.mode {
-  position: absolute;
-  top: 51px;
-  right: 25px;
-  font-size: 2rem;
-}
+icon.addEventListener("click", function() {
+  document.body.classList.toggle("dark-theme");
+  if (document.body.classList.contains("dark-theme")) {
+    icon.classList.replace("fa-moon", "fa-sun");
+  } else {
+    icon.classList.replace("fa-sun", "fa-moon");
+  }
+});
