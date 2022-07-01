@@ -146,7 +146,7 @@ img {
 
 /* add anime class to anmate */
 .anime {
-  animation: rotatePlayer 3.5s linear infinite;
+  animation: rotatePlayer 5s linear infinite;
 }
 
 @keyframes rotatePlayer {
